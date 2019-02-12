@@ -1,0 +1,66 @@
+.app-navbar {
+    background-color: $primary-color-dark;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    max-height: 100px;
+    min-height: 50px;
+    z-index: 3;
+    @include tablet {
+      padding: 20px;
+    }
+    a {
+      font-size: $logo-font;
+      color: $primary-color-text;
+    }
+    .fas {
+      font-size: 2rem;
+      cursor: pointer;
+      color: $primary-color-text;
+    }
+    .filter-container {
+      width: 85%;
+      @include tablet {
+        width: 40%;
+      }
+    }
+    .filter-input {
+      display: flex;
+    }
+    /* state */
+    &.no-search {
+      .filter-container,
+      .fa-times {
+        display: none;
+      }
+      .navbar-logo,
+      .fa-search {
+        display: block;
+      }
+      @include desktop {
+        .filter-container {
+          display: block;
+        }
+        .navbar-icon {
+          display: none;
+        }
+      }
+    }
+  
+    &.search {
+      .filter-container,
+      .fa-times {
+        display: block;
+      }
+      .navbar-logo,
+      .fa-search {
+        display: none;
+      }
+    }
+  }
+  

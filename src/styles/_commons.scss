@@ -1,0 +1,257 @@
+
+.button {
+    background-color: $primary-color-text;
+    border-radius: 2px;
+    border: 1px solid $primary-color-dark;
+    padding: 5px 10px;
+    color: $primary-color-dark;
+    transition: all linear .3s;
+    font-size: $primary-font-size;
+    cursor: pointer;
+    &:hover {
+      background-color: darken($primary-color-text, 20%);
+    }
+    &:active {
+      position:relative;
+      top:1px;
+    }
+    &.selected {
+      background-color: $primary-color-dark;
+      color: $primary-color-text;
+    }
+  }
+  
+  .icon {
+    background: transparent;
+    border: none;
+  }
+  
+  .button.secondary {
+    @extend .button;
+  }
+  
+  .button.primary {
+    @extend .button;
+    background-color: $primary-color-dark;
+    color: $primary-color-text;
+    &:hover {
+      background-color: lighten($primary-color-dark, 20%);
+    }
+  }
+  
+  .button.search {
+    @extend .button;
+    border: none;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+  
+  .input {
+    width: 100%;
+    border-radius: 2px;
+    padding: 10px;
+    border-style: none;
+    font-size: $primary-font-size;
+  }
+  
+  .input.primary {
+    @extend .input;
+    margin: 5px 0;
+    border: 1px solid $primary-color-dark;
+  }
+  
+  .input.search {
+    @extend .input;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-right: 1px solid $primary-color-dark;
+  }
+  
+  .card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background: $primary-color-text;
+    padding: 0;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
+    i, button {
+      cursor: pointer;
+    }
+    .card-header {
+      padding: 1em;
+      h2 {
+        font-size: $header-h2;
+        color: $primary-text-color;
+      }
+    }
+    .card-content,
+    .card-content-image img {
+      width: 100%;
+    }
+    .card-content {
+      box-sizing: border-box;
+      padding: 0 1em 1em 1em;
+      display: flex;
+      justify-content: space-between;
+      .card-content-image {
+        width: 100%;
+        max-width: 85px;
+        min-width: 85px;
+        @include desktop {
+          max-width: 200px;
+          min-width: 200px;
+        }
+      }
+      .card-content-text {
+        padding-bottom: 10px;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        p {
+          padding: 0 1em 1em 1em;
+          font-size: $primary-font-size;
+          line-height: 1.3;
+          max-height: 80px;
+          overflow-y: auto;
+          margin-bottom: 10px;
+          @include desktop {
+            max-height: 200px;
+          }
+        }
+        .rating-container {
+          position: absolute;
+          bottom: 0;
+          right: 2em;
+        }
+      }
+    }
+  }
+  
+  .secondary {
+    @extend .card;
+    .card-header {
+      &:after {
+        font-family: "Font Awesome 5 Free";
+        position: absolute;
+        font-size: $icons;
+        top: 13px;
+        right: 16px;
+      }
+      &:after {
+        content: "\f0d8";
+        font-weight: 900;
+      }
+    }
+    .card-content {
+      display: flex;
+      justify-content: space-between;
+    }
+    /* state */
+    &.close {
+      .card-header {
+        &:after {
+          content: "\f0d7";
+          font-weight: 900; 
+        }
+      }
+      .card-content {
+        display: none;
+        @include desktop {
+          display: flex;
+          justify-content: space-between;
+        }
+      }
+    }
+  
+    @include desktop {
+      max-width: 300px;
+      overflow: hidden;
+      padding-bottom: 1em;
+      .card-content {
+        padding: 0;
+        .card-content-image {
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          max-width: unset;
+          min-width: auto;
+          img {
+            height: 100%;
+          }
+        }
+      }
+      .rating-container {
+        display: none;
+      }
+      /* state */
+      .card-content-text,
+      .card-header {
+        transition: opacity .3s linear;
+        visibility: hidden;
+        opacity: 0;
+        h2 {
+          font-size: $header-h2;
+          color: $primary-color-text;
+        }
+      }
+      &:hover {
+        .card-header {
+          z-index: 1;
+          &:after {
+            display: none;
+          }
+        }
+        .card-content {
+          .card-content-image {
+            display: none;
+          }
+          p {
+            max-height: 200px;
+            overflow-y: auto;
+          }
+        }
+        .card-content-text,
+        .card-header {
+          visibility: visible;
+          opacity: 1;
+        }
+        &,
+        .card-header,
+        .card-content,
+        i {
+          background-color: $primary-text-color;
+          color: $primary-color-text;
+        }
+      }
+    }
+  }
+  
+  .loader {
+    z-index: 4;
+    grid-column: 2 / 3;
+    width: 100vw;
+    height: 100vh;
+    background-color: #0000007a;
+    color: #FFF;
+    font-size: 4.4rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .left-loader {
+    @extend .loader;
+    background-color: transparent;
+    color: #000;
+    text-align: right;
+    display: block;
+    width: auto;
+  }
+  
+  

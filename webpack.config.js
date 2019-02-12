@@ -8,7 +8,7 @@ module.exports = {
   mode: 'development',
   entry:{
     app: path.join(__dirname, 'src', 'main.js'),
-    // detail: path.join(__dirname, 'src', 'detail.js'),
+    detail: path.join(__dirname, 'src', 'detail.js'),
   },
   output: {
     filename: '[name].bundle.js',
@@ -56,11 +56,11 @@ module.exports = {
       template: path.join(__dirname, 'src', 'index.html'),
       chunks: ['app'],
     }),
-    // new htmlPlugin({
-    //   filename: 'detail.html',
-    //   template: path.join(__dirname, 'src', 'detail.html'),
-    //   chunks: ['detail'],
-    // }),
+    new htmlPlugin({
+      filename: 'detail.html',
+      template: path.join(__dirname, 'src', 'detail.html'),
+      chunks: ['detail'],
+    }),
     new webpack.HotModuleReplacementPlugin(),
   ],
   devServer: {
