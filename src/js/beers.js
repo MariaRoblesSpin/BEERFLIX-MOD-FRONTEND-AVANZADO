@@ -29,10 +29,9 @@ const templateBeer = ({beerId, name, image, description, principal}) =>
         </div>
         </div>
     </div> `
-const renderBeers = (element, datos) => {
+const renderBeersHome = (element, datos) => {
     const {beers} = datos 
-
-    const htmlBeers = beers.slice(0, 6).map( (beer, index) => {
+    const htmlBeers = beers.slice(0, 8).map( (beer, index) => {
        if (index < 2) {
             return templateBeer({
                 ...beer,
@@ -48,11 +47,40 @@ const renderBeers = (element, datos) => {
         header.addEventListener('click', openHeader(id))
     })
 }
+const renderQueryBeers = (element, datos, query) => {
+    if (query !== '') {
+        var htmlBeers = undefined
+        const {beers} = datos
+        if (query.indexOf('&limit=')) {
+            let elements = query.split('=')
+            let number = parseInt(elements.splice(1))
+            htmlBeers = beers.slice(0, number).map( beer => templateBeer(beer)).join('')
+        } 
+        console.log('Valor de beers: ', beers)
+            htmlBeers = beers.forEach( beer => {
+                console.log('Valor de templateBeer: ', templateBeer(beer))
+                return templateBeer(beer)
+            })
+        console.log(htmlBeers) // esto no lo entiendo. Sale undefined.
+        
+        element.innerHTML =  htmlBeers
+        const headers = document.querySelectorAll('.card.secondary .card-header')
+        headers.forEach((header) => {
+            const id = header.parentNode.getAttribute('id')
+            header.addEventListener('click', openHeader(id))
+        })
+    }
+}
 export const renderDOMBeers = async (query) => {
     try {
         const fetchBeers = await getBeers(query)
         const showSection = document.getElementById('show-section')
-        renderBeers(showSection, fetchBeers)
+        if (query) {
+            renderQueryBeers(showSection, fetchBeers, query)
+        } else {
+            renderBeersHome(showSection, fetchBeers)
+        }
+        
     } catch (err) {
         console.log(err)
     }

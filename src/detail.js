@@ -32,4 +32,5 @@ const renderDetail = async () => {
 }
 renderDetail()
 renderAllComments()
+
 console.log('detail!!!!!!!!!!')

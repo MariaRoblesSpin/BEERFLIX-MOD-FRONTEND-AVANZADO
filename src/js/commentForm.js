@@ -35,9 +35,11 @@ export const renderAllComments = async () => {
         const [, id] = window.location.search ? window.location.search.split('=') : []
         const getComments = await getBeersDetail(id)
         const allComments = getComments.beer.comment 
-        allComments.forEach( comment => {
-            document.getElementById('quoteList').insertAdjacentHTML("afterbegin", commentTemplate(comment))  
-        })
+        if (allComments) {
+            allComments.forEach( comment => {
+                document.getElementById('quoteList').insertAdjacentHTML("afterbegin", commentTemplate(comment))  
+            })
+        }
    
     } catch(err) {
         console.error(err)

@@ -26,6 +26,8 @@ const api = (API_URL = 'https://web-bootcamp-exercise-beer-api-nijliozdcg.now.sh
     },
     getBeers: async (query) => {
       try {
+        // malt&limit=2 para la búsqueda limitada
+        // creo que tengo que descomponer la query
         const requestUrl = query ?
           `${SEARCH_API_URL}${query}` :
           API_URL;
@@ -47,6 +49,8 @@ const api = (API_URL = 'https://web-bootcamp-exercise-beer-api-nijliozdcg.now.sh
     },
     getBeersDetail: async (id) => {
       try {
+        const detailSection = document.getElementById('detailSection')
+        detailSection.classList.add('loading')
         const response = await fetch(`${API_URL}/${id}`, {
             method: 'GET',
             headers: {
@@ -54,21 +58,16 @@ const api = (API_URL = 'https://web-bootcamp-exercise-beer-api-nijliozdcg.now.sh
               'X-API-KEY': API_KEY,
             },
           });
-          // no funciona
-        // const detailSection = document.getElementById('detailSection')
-        // console.log('buscando statusCode: ', response)
-        // if (!response) {
-        //   detailSection.classList.add('loading')
-        // } else {
-        //   detailSection.classList.remove('loading')
-        // }
+        if (response) {
+          detailSection.classList.remove('loading')
+        } 
         const beer = await response.json();
-        
         return beer;
       } catch(e) {
         console.error(e);
       }
     },
+
   };
 };
 
