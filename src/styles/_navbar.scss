@@ -34,6 +34,7 @@
     }
     /* state */
     &.no-search {
+      picture,
       .filter-container,
       .fa-times {
         display: none;
@@ -53,6 +54,35 @@
     }
   
     &.search {
+      padding: 0;
+      height: 70px;
+      picture {
+        display: flex; 
+        height: 70px;
+        z-index: -10;
+        position: absolute;
+        img{
+          object-fit: cover;
+        }
+      }
+      .filter-container{
+        display: flex;
+        align-items: center;
+        z-index: 10;
+        margin: 0 10px;
+        position: absolute;
+      }
+      .input{
+        &.limit{
+          margin: 0 3px;
+          width: 40px;
+        }
+      }
+      .navbar-icon {
+        z-index: 10;
+        position: absolute;
+        right: 10px;
+      }
       .filter-container,
       .fa-times {
         display: block;

@@ -40,7 +40,6 @@ export const renderAllComments = async () => {
                 document.getElementById('quoteList').insertAdjacentHTML("afterbegin", commentTemplate(comment))  
             })
         }
-   
     } catch(err) {
         console.error(err)
     }

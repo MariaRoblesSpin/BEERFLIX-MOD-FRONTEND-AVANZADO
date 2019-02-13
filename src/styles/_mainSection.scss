@@ -1,11 +1,23 @@
 
 .show-section {
     grid-area: main;
+    & > div:first-child {
+      margin: 20px 0 10px 0;
+    }
+    & > div:last-child {
+      margin: 10px 0 20px 0;
+    }
     & > div {
-      margin: 20px 0;
+      margin: 10px 0;
       @include desktop {
         margin: 0;
       }
+    }
+    & > div.loader {
+      margin: 0;
+      z-index: 10;
+      position: absolute;
+      left: 0;
     }
     @include desktop {
       margin: 20px 0 40px;

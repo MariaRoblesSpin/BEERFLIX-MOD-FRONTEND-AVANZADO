@@ -4,6 +4,23 @@ const api = (API_URL = 'https://web-bootcamp-exercise-beer-api-nijliozdcg.now.sh
   const SEARCH_API_URL = `${API_URL}?search=`;
   //const BEERS_URL = `${API_URL}/`;
   return {
+    addLikes: async (id) => {
+      try {
+        const response = await fetch(`${API_URL}/${id}/like`, {
+          method: 'POST',
+          headers: {
+            'Content-type': 'application/json',
+            'X-API-KEY': API_KEY,
+          },
+        });
+        console.log('qué es esta respuesta like:', response);
+        const datos = await response.json();
+        return datos;
+      } catch(err) {
+        console.error(err);
+        throw err;
+      }
+    },
     createComment: async (id, text) => {
       try {
         const response = await fetch(`${API_URL}/${id}/comment`, {
@@ -19,17 +36,15 @@ const api = (API_URL = 'https://web-bootcamp-exercise-beer-api-nijliozdcg.now.sh
         console.log('qué es esta respuesta:', response);
         const comment = await response.json();
         return comment;
-      } catch (e) {
-        console.error(e);
-        throw e;
+      } catch (err) {
+        console.error(err);
+        throw err;
       }
     },
-    getBeers: async (query) => {
-      try {
-        // malt&limit=2 para la búsqueda limitada
-        // creo que tengo que descomponer la query
+    getBeers: async (query, number) => {
+      try {      
         const requestUrl = query ?
-          `${SEARCH_API_URL}${query}` :
+          `${SEARCH_API_URL}${query}&limit=${number}` :
           API_URL;
         const response = await fetch(requestUrl, {
             method: 'GET',
@@ -39,12 +54,21 @@ const api = (API_URL = 'https://web-bootcamp-exercise-beer-api-nijliozdcg.now.sh
             },
           }
         );
+        console.log('valor number: ', number)
         const datos = await response.json();
         console.log('MUESTRA DATOS: ', datos)
+        const { beers } = datos 
+        beers.forEach( (beer, index, arrBeers) => { 
+          let month = beer.firstBrewed.slice(0,2)
+          let year = beer.firstBrewed.slice(3)
+          let goodDate = year + month
+          beer.firstBrewed = goodDate
+        })
+        beers.sort((a, b) => parseFloat(a.firstBrewed) - parseFloat(b.firstBrewed)); 
         return datos;
-      } catch (e) {
-        console.error(e);
-        throw e;
+      } catch (err) {
+        console.error(err);
+        throw err;
       }
     },
     getBeersDetail: async (id) => {
@@ -63,8 +87,8 @@ const api = (API_URL = 'https://web-bootcamp-exercise-beer-api-nijliozdcg.now.sh
         } 
         const beer = await response.json();
         return beer;
-      } catch(e) {
-        console.error(e);
+      } catch(err) {
+        console.error(err);
       }
     },
 

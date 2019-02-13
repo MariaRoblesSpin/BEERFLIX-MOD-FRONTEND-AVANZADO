@@ -22,6 +22,7 @@
   }
   
   .icon {
+    color: $primary-color;
     background: transparent;
     border: none;
   }
@@ -60,39 +61,44 @@
     border: 1px solid $primary-color-dark;
   }
   
-  .input.search {
-    @extend .input;
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-    border-right: 1px solid $primary-color-dark;
-  }
-  
   .card {
     position: relative;
     display: flex;
     flex-direction: column;
-    background: $primary-color-text;
+    background: $primary-color-text ;
+    color: $primary-text-color;
     padding: 0;
     border: none;
-    border-radius: 5px;
+    border-radius: 2px;
     box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
-    i, button {
+    i, button, a {
       cursor: pointer;
     }
-    .card-header {
-      padding: 1em;
-      h2 {
-        font-size: $header-h2;
-        color: $primary-text-color;
+    &.principal {
+      .card-header{
+        h2{
+          a {
+            color: $primary-color-dark;
+          }
+        }
       }
     }
-    .card-content,
+    .card-header {
+      padding: 1rem;
+      h2 {
+        font-size: $header-h2;
+        color: $primary-color;
+        a {
+          color: $primary-color;
+        }
+      }
+    }
     .card-content-image img {
-      width: 100%;
+      width: 60%;
     }
     .card-content {
       box-sizing: border-box;
-      padding: 0 1em 1em 1em;
+      padding: 0 1.5rem 1rem 1rem;
       display: flex;
       justify-content: space-between;
       .card-content-image {
@@ -108,22 +114,21 @@
         padding-bottom: 10px;
         position: relative;
         display: flex;
-        flex-direction: column;
+        flex-wrap: wrap;
         p {
-          padding: 0 1em 1em 1em;
+          padding: 0 0 1rem 1rem;
           font-size: $primary-font-size;
           line-height: 1.3;
-          max-height: 80px;
-          overflow-y: auto;
+          width: 100%;
+          max-height: 100%;
           margin-bottom: 10px;
           @include desktop {
             max-height: 200px;
           }
         }
         .rating-container {
-          position: absolute;
-          bottom: 0;
-          right: 2em;
+          width: 100%;
+          text-align: end;
         }
       }
     }
@@ -150,6 +155,11 @@
     }
     /* state */
     &.close {
+      background: $primary-text-color;
+      color: $primary-color-text;
+      a{
+        color: $primary-color-text;
+      }
       .card-header {
         &:after {
           content: "\f0d7";
@@ -168,9 +178,15 @@
     @include desktop {
       max-width: 300px;
       overflow: hidden;
-      padding-bottom: 1em;
+      padding-bottom: 1rem;
       .card-content {
         padding: 0;
+        a{
+          color: $primary-color-text;
+          &:hover{
+            color: $primary-color;
+          }
+        }
         .card-content-image {
           position: absolute;
           top: 0;
@@ -232,10 +248,9 @@
   
   .loader {
     z-index: 4;
-    grid-column: 2 / 3;
     width: 100vw;
     height: 100vh;
-    background-color: #0000007a;
+    background-color: #d128287a;
     color: #FFF;
     font-size: 4.4rem;
     text-align: center;

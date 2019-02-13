@@ -5,7 +5,7 @@ import defaultImg from '../images/default.jpg'
 const { getBeers } = api()
 
 const templateBeer = ({beerId, name, image, description, principal}) => 
-    `<div id="${beerId}" class="card ${principal ? 'principal': 'secondary close'}">
+    `<div class="card ${principal ? 'principal': 'secondary close'}">
         <header class="card-header">
         <h2><a href="http://localhost:3000/detail.html?id=${beerId}">${name}</a></h2>
         </header>
@@ -15,16 +15,11 @@ const templateBeer = ({beerId, name, image, description, principal}) =>
         </div>
         <div class="card-content-text">
             <p>${striptags(description)}</p>
-            <div class="rating-container">
-            <button class="icon">
-                <i class="fas fa-star"></i>
-            </button>
-            <button class="icon">
-                <i class="far fa-star"></i>
-            </button>
-            <button class="icon">
-                <i class="far fa-star"></i>
-            </button>
+            <div id="_${beerId}" class="rating-container">
+                <button class="icon">
+                    <i class="fas fa-heart fa-2x"></i>
+                </button>
+                <span class="likes"> likes</span>
             </div>
         </div>
         </div>
@@ -47,23 +42,19 @@ const renderBeersHome = (element, datos) => {
         header.addEventListener('click', openHeader(id))
     })
 }
-const renderQueryBeers = (element, datos, query) => {
+const renderQueryBeers = (element, datos, query, number) => {
     if (query !== '') {
-        var htmlBeers = undefined
+        var htmlBeers 
         const {beers} = datos
-        if (query.indexOf('&limit=')) {
-            let elements = query.split('=')
-            let number = parseInt(elements.splice(1))
+        if (number > 0) {
             htmlBeers = beers.slice(0, number).map( beer => templateBeer(beer)).join('')
-        } 
+            element.innerHTML =  htmlBeers
+            //console.log(htmlBeers)
+        } else if (number <= 0 || number === undefined){
         console.log('Valor de beers: ', beers)
-            htmlBeers = beers.forEach( beer => {
-                console.log('Valor de templateBeer: ', templateBeer(beer))
-                return templateBeer(beer)
-            })
-        console.log(htmlBeers) // esto no lo entiendo. Sale undefined.
-        
-        element.innerHTML =  htmlBeers
+            htmlBeers = beers.forEach( beer =>  templateBeer(beer))
+            element.innerHTML =  htmlBeers
+        }
         const headers = document.querySelectorAll('.card.secondary .card-header')
         headers.forEach((header) => {
             const id = header.parentNode.getAttribute('id')
@@ -71,12 +62,12 @@ const renderQueryBeers = (element, datos, query) => {
         })
     }
 }
-export const renderDOMBeers = async (query) => {
+export const renderDOMBeers = async (query, number) => {
     try {
-        const fetchBeers = await getBeers(query)
+        const fetchBeers = await getBeers(query, number)
         const showSection = document.getElementById('show-section')
         if (query) {
-            renderQueryBeers(showSection, fetchBeers, query)
+            renderQueryBeers(showSection, fetchBeers, query, number)
         } else {
             renderBeersHome(showSection, fetchBeers)
         }

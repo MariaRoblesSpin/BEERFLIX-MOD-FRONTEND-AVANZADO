@@ -1,11 +1,14 @@
-$primary-color-dark:   #388E3C;
-$primary-color:        #4CAF50;
-$primary-color-light:  #C8E6C9;
+$primary-color-dark:   rgb(0, 0, 0);
+$primary-color:        #ffad15;
+$primary-color-light:  lighten($primary-color, 50%);
 $primary-color-text:   #FFFFFF;
 $accent-color:         #9E9E9E;
 $primary-text-color:   #212121;
 $secondary-text-color: #757575;
 $divider-color:        #BDBDBD;
+
+$header-font-family: 'Staatliches';
+$primary-font-family: 'Lato', sans-serif;
 
 $primary-font-size: 1rem;
 $icons: $primary-font-size + .5rem;

@@ -1,0 +1,23 @@
+* {
+    font-family: 'Staatliches';
+    font-family: 'Lato', sans-serif;
+  }
+    
+  h1, h2, h3, h4, h5, h6, label, button {
+    font-family: $header-font-family;
+  }
+  a {
+    text-decoration: none;
+  }
+    
+  main {
+    font-family: $primary-font-family;
+    min-height: 100vh;
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: 5% 1fr 5%;
+    grid-template-rows: minmax(max-content, 50px) 1fr;
+    grid-template-areas: 
+      ". filter ."
+      ". main .";
+  }
