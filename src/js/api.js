@@ -6,16 +6,13 @@ const api = (API_URL = 'https://web-bootcamp-exercise-beer-api-nijliozdcg.now.sh
   return {
     addLikes: async (id) => {
       try {
-        const response = await fetch(`${API_URL}/${id}/like`, {
+        await fetch(`${API_URL}/${id}/like`, {
           method: 'POST',
           headers: {
             'Content-type': 'application/json',
             'X-API-KEY': API_KEY,
           },
         });
-        console.log('qué es esta respuesta like:', response);
-        const datos = await response.json();
-        return datos;
       } catch(err) {
         console.error(err);
         throw err;
@@ -74,7 +71,9 @@ const api = (API_URL = 'https://web-bootcamp-exercise-beer-api-nijliozdcg.now.sh
     getBeersDetail: async (id) => {
       try {
         const detailSection = document.getElementById('detailSection')
-        detailSection.classList.add('loading')
+        if (detailSection !== null) {
+          detailSection.classList.add('loading')
+        }
         const response = await fetch(`${API_URL}/${id}`, {
             method: 'GET',
             headers: {
@@ -82,7 +81,7 @@ const api = (API_URL = 'https://web-bootcamp-exercise-beer-api-nijliozdcg.now.sh
               'X-API-KEY': API_KEY,
             },
           });
-        if (response) {
+        if (response && detailSection !== null) {
           detailSection.classList.remove('loading')
         } 
         const beer = await response.json();

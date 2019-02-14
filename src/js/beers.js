@@ -2,10 +2,12 @@ import striptags from 'striptags'
 import {openHeader} from './ui'
 import api from './api'
 import defaultImg from '../images/default.jpg'
+import {drawLikes} from './likes'
 const { getBeers } = api()
 
-const templateBeer = ({beerId, name, image, description, principal}) => 
-    `<div class="card ${principal ? 'principal': 'secondary close'}">
+
+const templateBeer = ({beerId, name, image, description, likes, principal}) =>  
+    `<div id="_${beerId}" class="card ${principal ? 'principal': 'secondary close'}">
         <header class="card-header">
         <h2><a href="http://localhost:3000/detail.html?id=${beerId}">${name}</a></h2>
         </header>
@@ -15,11 +17,11 @@ const templateBeer = ({beerId, name, image, description, principal}) =>
         </div>
         <div class="card-content-text">
             <p>${striptags(description)}</p>
-            <div id="_${beerId}" class="rating-container">
+            <div class="rating-container">
                 <button class="icon">
                     <i class="fas fa-heart fa-2x"></i>
                 </button>
-                <span class="likes"> likes</span>
+                <span class="likes">${likes} likes</span>
             </div>
         </div>
         </div>
@@ -52,7 +54,7 @@ const renderQueryBeers = (element, datos, query, number) => {
             //console.log(htmlBeers)
         } else if (number <= 0 || number === undefined){
         console.log('Valor de beers: ', beers)
-            htmlBeers = beers.forEach( beer =>  templateBeer(beer))
+            htmlBeers = beers.map( beer => templateBeer(beer)).join('')
             element.innerHTML =  htmlBeers
         }
         const headers = document.querySelectorAll('.card.secondary .card-header')
@@ -68,12 +70,22 @@ export const renderDOMBeers = async (query, number) => {
         const showSection = document.getElementById('show-section')
         if (query) {
             renderQueryBeers(showSection, fetchBeers, query, number)
+            drawLikes()
         } else {
             renderBeersHome(showSection, fetchBeers)
+            drawLikes()
         }
-        
     } catch (err) {
         console.log(err)
     }
 }
+
+
+
 renderDOMBeers()
+
+
+
+
+
+
