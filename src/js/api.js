@@ -38,8 +38,8 @@ const api = (API_URL = 'https://web-bootcamp-exercise-beer-api-nijliozdcg.now.sh
         throw err;
       }
     },
-    getBeers: async (query, number) => {
-      try {      
+    getBeers: async (query, number, date) => {
+      try {    
         const requestUrl = query ?
           `${SEARCH_API_URL}${query}&limit=${number}` :
           API_URL;
@@ -51,17 +51,21 @@ const api = (API_URL = 'https://web-bootcamp-exercise-beer-api-nijliozdcg.now.sh
             },
           }
         );
-        console.log('valor number: ', number)
-        const datos = await response.json();
-        console.log('MUESTRA DATOS: ', datos)
-        const { beers } = datos 
-        beers.forEach( (beer, index, arrBeers) => { 
-          let month = beer.firstBrewed.slice(0,2)
-          let year = beer.firstBrewed.slice(3)
-          let goodDate = year + month
-          beer.firstBrewed = goodDate
-        })
-        beers.sort((a, b) => parseFloat(a.firstBrewed) - parseFloat(b.firstBrewed)); 
+        let datos = await response.json();
+        let { beers } = datos 
+
+        if (date !== '' && date !==undefined){
+          let filteredBeers = []
+          for (var i = 0 ; i<beers.length; i++) {
+            let year = beers[i].firstBrewed.slice(3)   
+            if (date == year) {
+              filteredBeers.push(beers[i]) 
+            } 
+          }
+          beers = filteredBeers
+        }
+        datos.beers = beers
+       
         return datos;
       } catch (err) {
         console.error(err);

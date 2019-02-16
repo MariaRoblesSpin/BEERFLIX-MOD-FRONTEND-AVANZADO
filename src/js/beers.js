@@ -1,12 +1,12 @@
 import striptags from 'striptags'
 import {openHeader} from './ui'
 import api from './api'
-import defaultImg from '../images/default.jpg'
+import defaultImg from '../images/fondo_576.jpg'
 import {drawLikes} from './likes'
 const { getBeers } = api()
 
 
-const templateBeer = ({beerId, name, image, description, likes, principal}) =>  
+const templateBeer = ({beerId, name, image, brewersTips, likes, principal}) =>  
     `<div id="_${beerId}" class="card ${principal ? 'principal': 'secondary close'}">
         <header class="card-header">
         <h2><a href="http://localhost:3000/detail.html?id=${beerId}">${name}</a></h2>
@@ -16,7 +16,7 @@ const templateBeer = ({beerId, name, image, description, likes, principal}) =>
             <img src="${image ? image : defaultImg}"/>
         </div>
         <div class="card-content-text">
-            <p>${striptags(description)}</p>
+            <p>${striptags(brewersTips)}</p>
             <div class="rating-container">
                 <button class="icon">
                     <i class="fas fa-heart fa-2x"></i>
@@ -64,16 +64,19 @@ const renderQueryBeers = (element, datos, query, number) => {
         })
     }
 }
-export const renderDOMBeers = async (query, number) => {
+export const renderDOMBeers = async (query, number, date) => {
     try {
-        const fetchBeers = await getBeers(query, number)
+        const fetchBeers = await getBeers(query, number, date)
         const showSection = document.getElementById('show-section')
         if (query) {
             renderQueryBeers(showSection, fetchBeers, query, number)
-            drawLikes()
+            drawLikes('.card')
+        } else if (date !== '' && date !== undefined) {
+            renderQueryBeers(showSection, fetchBeers, query, number)
+            drawLikes('.card')
         } else {
             renderBeersHome(showSection, fetchBeers)
-            drawLikes()
+            drawLikes('.card')
         }
     } catch (err) {
         console.log(err)

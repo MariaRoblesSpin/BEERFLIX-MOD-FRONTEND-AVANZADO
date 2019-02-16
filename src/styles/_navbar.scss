@@ -3,7 +3,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px;
     position: fixed;
     top: 0;
     left: 0;
@@ -11,41 +10,39 @@
     max-height: 100px;
     min-height: 50px;
     z-index: 3;
-    @include tablet {
-      padding: 20px;
-    }
     a {
       font-size: $logo-font;
       color: $primary-color-text;
+      vertical-align: bottom;
     }
     .fas {
       font-size: 2rem;
       cursor: pointer;
       color: $primary-color-text;
     }
-    .filter-container {
-      width: 85%;
-      @include tablet {
-        width: 40%;
-      }
-    }
     .filter-input {
       display: flex;
     }
+
     /* state */
     &.no-search {
+      height: 70px;
       picture,
       .filter-container,
       .fa-times {
         display: none;
       }
-      .navbar-logo,
+      .navbar-logo {
+        display: block;
+        padding: 20px;
+      }
       .fa-search {
         display: block;
+        margin-right: 20px;
       }
       @include desktop {
         .filter-container {
-          display: block;
+          display: flex;
         }
         .navbar-icon {
           display: none;
@@ -54,38 +51,49 @@
     }
   
     &.search {
-      padding: 0;
-      height: 70px;
       picture {
-        display: flex; 
+        width: 100%;
+        display: flex;
+        padding: 0;
         height: 70px;
-        z-index: -10;
-        position: absolute;
         img{
           object-fit: cover;
         }
       }
-      .filter-container{
-        display: flex;
-        align-items: center;
-        z-index: 10;
-        margin: 0 10px;
-        position: absolute;
-      }
       .input{
-        &.limit{
+        &.limit {
+          padding: 0 5px;
           margin: 0 3px;
-          width: 40px;
+          width: 34px;
+        }
+        &.year {
+          margin: 0 3px 0 0;
+          width: 38px;
         }
       }
       .navbar-icon {
         z-index: 10;
         position: absolute;
-        right: 10px;
+        right: 0px;
       }
-      .filter-container,
+      .filter-container {
+        width:80%;
+        display: flex;  
+        align-items: center;
+        justify-content: start;
+        padding: 20px;
+        z-index: 10;
+        position: absolute;
+        @include tablet {
+          width: 40%;
+        }
+        @include desktop {
+          padding: 20px;
+        }
+      }
       .fa-times {
         display: block;
+        margin-right: 20px;
       }
       .navbar-logo,
       .fa-search {

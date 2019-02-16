@@ -1,6 +1,9 @@
 <navbar id="navbar" class="app-navbar no-search">
   <picture>
-    <img src="../images/fondo_birra_01.jpg"/ alt="background image">
+    <source media="(min-width: 1200px)" srcset="../images/fondo_1400.jpg">
+    <source media="(min-width: 992px)"  srcset="../images/fondo_1200.jpg">
+    <source media="(min-width: 576px)"  srcset="../images/fondo_800.jpg">
+    <img src="../images/fondo_576.jpg">
   </picture>
   <div class="navbar-logo">
     <h1><a href="/">BeerFlix</a></h1>
@@ -8,7 +11,8 @@
   <div class="filter-container">
     <form id="search-form" class="filter-input">
       <input placeholder="search your beer" class="input search" type="text">
-      <input placeholder="limit" class="input limit" type="number">
+      <input placeholder="0-80" class="input limit" type="number">
+      <input placeholder="year" class="input year" type="number">
       <button type="submit" class="button search">Search</button>
     </form>
   </div>

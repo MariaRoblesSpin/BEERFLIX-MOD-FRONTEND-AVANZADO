@@ -40,11 +40,13 @@ module.exports = {
         exclude: /node_modules/,
       },
       {
-        test:/\.(jpg|png|gif)$/ ,
+        test: /\.(jp(e*)g|png|gif|ico)$/,
         use: [
           {
             loader: 'file-loader',
-            options: { },
+            options: {
+              name: '[name].[ext]',
+            },
           },
         ]
       },
