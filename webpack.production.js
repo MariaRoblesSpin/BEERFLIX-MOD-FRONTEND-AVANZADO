@@ -33,7 +33,7 @@ module.exports = {
           {
             loader: 'file-loader',
             options: {
-              name: '[name].production.[ext]'
+              name: '[name].[ext]'
             },
           },
         ]

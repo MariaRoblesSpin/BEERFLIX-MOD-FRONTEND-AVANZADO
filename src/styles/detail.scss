@@ -6,10 +6,9 @@
 @import "navbar";
 main {
     display: block;
-    margin: 70px 0;
   }
   .disabled {
-    display: none;
+   visibility: hidden
   }
   .app-navbar {
     .filter-container {
@@ -45,12 +44,15 @@ main {
         display: none;
       }
     }
-    .detail-content{
-      box-sizing: border-box;
-      padding: 0 1.5rem;
-    }
     .container {
       margin-bottom: 1rem;
+      @include tablet {
+       display: flex;
+       flex-wrap: wrap;
+      }
+      @include desktop {
+        flex-wrap: nowrap;
+       }
     }
     header {
       position: relative;
@@ -59,6 +61,10 @@ main {
       padding-bottom: 0.5rem;
       display: flex;
       width: 100%;
+      @include tablet {
+        display: flex;
+        width: 100%;
+      }
       .name-section {
         width: 70%;
       }
@@ -73,45 +79,58 @@ main {
 
       @include desktop {
         display: flex;
-        flex-direction: column;
         justify-content: center;
         width: 100%;
       }
-      
     }
     .content{
       display: grid;
       grid-template-columns: 30% 70%;
+      grid-template-areas: "image content";
       padding-bottom: 1rem;
       div {
         padding-bottom: 0.7rem;
       }
-    }
-    .title-section {
-      color: $primary-color;
-      font-size: $icons + 1rem;
-      text-align: center;
-      margin: 10px 0;
+      @include tablet {
+        display: flex;
+        width: 100%;
+      }
+      @include desktop {
+        width: 55%;
+        padding-right: 5%
+      }
     }
     .image-container {
-      margin-right: 1rem;
-      padding-bottom: 0 !important;
       @include desktop {
-        width: 50%;
+        width: 20%;
       }
-      img {
+    }
+    .info-wrapper {
+      @include tablet {
+        display: flex;
+        flex-wrap: nowrap;
+      }
+      @include desktop {
         width: 80%;
-        @include desktop {
-          border-radius: 25px;
-        }
+        flex-wrap: wrap;
+        align-content: flex-start;
+      }
+    }
+    .description {
+      @include tablet {
+        display: flex;
+        width: 100%;
+        margin-left: 3%;
       }
     }
     .info-container {
+      grid-area: content;
       font-size: $secondary-font-size;
       line-height: 1.2rem;
       padding: 1rem;
       background-color: $primary-color;
       border-radius: 5px;
+      margin-bottom: 1.5rem;
       h3 {
         font-size: $secondary-font-size*1.2;
         color: $primary-color-text;
@@ -121,12 +140,87 @@ main {
       p {
         display: inline-block;
       }
+      div {
+        width: 100%;
+      }
       .creator p, .date p {
         font-weight: bold;
         font-size: $secondary-font-size*0.9;
       }
+      @include tablet {
+        width: 100%;
+        display: flex;
+        align-content: flex-start;
+        flex-wrap: wrap;
+      }
+      @include desktop {
+        height: max-content;
+      }
     }
+    .title-section {
+      color: $primary-color;
+      font-size: $icons + 1rem;
+      text-align: center;
+      margin: 10px 0;
+    }
+    .image-container {
+      grid-area: image;
+      margin-right: 1rem;
+      padding-bottom: 0 !important;
+      @include desktop {
+        width: 30%;
+      }
+      img {
+        width: 80%;
+        @include desktop {
+          width: 70%;
+        }
+      }
+    }
+   
     .card {
+      &.secondary {
+        .card-header {
+          padding: 0;
+          h2 {
+            padding: 0.6rem 1rem;
+          }
+        }
+      }
+      &.secondary.close {
+        width: 100%;
+        color: $primary-color-dark !important;
+        @include desktop {
+          width: 40%;
+          background-color: $primary-color-text;
+          box-shadow: none !important;
+          overflow: hidden;
+          padding-bottom: 1rem;
+        }
+        .card-header {
+          padding: 0;
+          color: $primary-color-text;
+          @include desktop {
+            opacity: 1;
+            transition: none;
+            justify-content: flex-start;
+            visibility: visible !important;
+          }
+          h2 {
+            padding: 0.6rem 1rem;
+            @include desktop {
+              color: $primary-color-dark;
+              padding: 0;
+            }
+          }
+          &::after {
+            top:8px;
+            @include desktop {
+              content: unset;
+            }
+          }
+        }
+      }
       .card-content{
         flex-wrap: wrap;
         justify-content: flex-start;
@@ -141,24 +235,29 @@ main {
           margin: 0.3rem 0 1rem 0;
         }
         .box{
+          grid-column: auto;
           padding: 0.3rem 0.7rem;
           font-size: $secondary-font-size;
           color: $primary-color-text;
           background-color: darken($primary-color, 20%);
           border: darken($primary-color, 20%) solid 2px;
           border-radius: 5px;
+          @include desktop {
+            h5 {
+              width: max-content;
+              display: inline-block;
+              padding-right: 0.5rem;
+            }
+            p {
+              width: max-content;
+              display: inline-block;
+            }
+
+          }
         }
       }
     }
-    .card-header {
-      padding: 0;
-      h2 {
-        padding: 0.6rem 1rem;
-      }
-      &::after {
-        top:8px;
-      }
-    }
+    
     .comments-list {
       h2 {
         font-size: $header-h2;
@@ -178,12 +277,10 @@ main {
     .comments-form,
     .comments-list {
       box-sizing: border-box;
-      padding: 0 1.5rem;
       width: 100%;
       margin: 20px auto;
       @include desktop {
-        margin: 50px auto;
-        width: 70%;
+
       }
       p {
         line-height: 1.4;

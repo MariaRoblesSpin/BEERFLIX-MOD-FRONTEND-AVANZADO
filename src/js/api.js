@@ -38,11 +38,29 @@ const api = (API_URL = 'https://web-bootcamp-exercise-beer-api-nijliozdcg.now.sh
         throw err;
       }
     },
-    getBeers: async (query, number, date) => {
-      try {    
+    getBeers: async (query, number) => {
+      try {   
         const requestUrl = query ?
-          `${SEARCH_API_URL}${query}&limit=${number}` :
-          API_URL;
+        `${SEARCH_API_URL}${query}&limit=${number}` :
+        API_URL;
+        const response = await fetch(requestUrl, {
+            method: 'GET',
+            headers: {
+              'Content-type': 'application/json',
+              'X-API-KEY': API_KEY,
+            },
+          }
+        );
+        let datos = await response.json();
+        return datos;
+      } catch (err) {
+        console.error(err);
+        throw err;
+      }
+    },
+    getBeersDate: async (date) => {
+      try {   
+        const requestUrl = API_URL;
         const response = await fetch(requestUrl, {
             method: 'GET',
             headers: {

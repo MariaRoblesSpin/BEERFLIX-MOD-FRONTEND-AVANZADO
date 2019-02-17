@@ -1,23 +1,29 @@
 <navbar id="navbar" class="app-navbar no-search">
   <picture>
-    <source media="(min-width: 1200px)" srcset="../images/fondo_1400.jpg">
-    <source media="(min-width: 992px)"  srcset="../images/fondo_1200.jpg">
-    <source media="(min-width: 576px)"  srcset="../images/fondo_800.jpg">
-    <img src="../images/fondo_576.jpg">
+    <source media="(min-width: 1400px)" srcset="/fondo_1900.jpg">
+    <source media="(min-width: 1200px)" srcset="/fondo_1400.jpg">
+    <source media="(min-width: 992px)"  srcset="/fondo_1200.jpg">
+    <source media="(min-width: 768px)"  srcset="/fondo_1000.jpg">
+    <source media="(min-width: 576px)"  srcset="/fondo_800.jpg">
+    <img src="/fondo_576.jpg">
   </picture>
-  <div class="navbar-logo">
-    <h1><a href="/">BeerFlix</a></h1>
-  </div>
-  <div class="filter-container">
-    <form id="search-form" class="filter-input">
-      <input placeholder="search your beer" class="input search" type="text">
-      <input placeholder="0-80" class="input limit" type="number">
-      <input placeholder="year" class="input year" type="number">
-      <button type="submit" class="button search">Search</button>
-    </form>
-  </div>
-  <div class="navbar-icon">
-    <i id="navbar-search" class="fas fa-search"></i>
-    <i id="navbar-close" class="fas fa-times"></i>
+  <div class="wrapper">
+    <div class="navbar-logo">
+      <h1><a href="/">BeerFlix</a></h1>
+    </div>
+    <div class="filter-wrapper">
+      <div class="filter-container">
+        <form id="search-form" class="filter-input">
+          <input placeholder="search by text" class="input search" type="text">
+          <input placeholder="0-80" class="input limit" type="number">
+          <input placeholder=" by year" class="input year" type="number">
+          <button type="submit" class="button search">Search</button>
+        </form>
+      </div>
+      <div class="navbar-icon">
+        <i id="navbar-search" class="fas fa-search"></i>
+        <i id="navbar-close" class="fas fa-times"></i>
+      </div>
+    </div>
   </div>
 </navbar>

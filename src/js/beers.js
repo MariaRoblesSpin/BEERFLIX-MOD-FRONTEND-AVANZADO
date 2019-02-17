@@ -4,6 +4,7 @@ import api from './api'
 import defaultImg from '../images/fondo_576.jpg'
 import {drawLikes} from './likes'
 const { getBeers } = api()
+const { getBeersDate } = api()
 
 
 const templateBeer = ({beerId, name, image, brewersTips, likes, principal}) =>  
@@ -51,12 +52,11 @@ const renderQueryBeers = (element, datos, query, number) => {
         if (number > 0) {
             htmlBeers = beers.slice(0, number).map( beer => templateBeer(beer)).join('')
             element.innerHTML =  htmlBeers
-            //console.log(htmlBeers)
         } else if (number <= 0 || number === undefined){
         console.log('Valor de beers: ', beers)
             htmlBeers = beers.map( beer => templateBeer(beer)).join('')
             element.innerHTML =  htmlBeers
-        }
+        } 
         const headers = document.querySelectorAll('.card.secondary .card-header')
         headers.forEach((header) => {
             const id = header.parentNode.getAttribute('id')
@@ -64,18 +64,34 @@ const renderQueryBeers = (element, datos, query, number) => {
         })
     }
 }
+const renderDateBeers = (element, datos) => {
+
+    var htmlBeers 
+    const {beers} = datos
+    htmlBeers = beers.map( beer => templateBeer(beer)).join('')
+    element.innerHTML =  htmlBeers
+
+    const headers = document.querySelectorAll('.card.secondary .card-header')
+    headers.forEach((header) => {
+        const id = header.parentNode.getAttribute('id')
+        header.addEventListener('click', openHeader(id))
+    })
+}
 export const renderDOMBeers = async (query, number, date) => {
     try {
-        const fetchBeers = await getBeers(query, number, date)
-        const showSection = document.getElementById('show-section')
+        
+        const beersSection = document.getElementById('beers-section')
         if (query) {
-            renderQueryBeers(showSection, fetchBeers, query, number)
+            let fetchBeers = await getBeers(query, number)
+            renderQueryBeers(beersSection, fetchBeers, query, number)
             drawLikes('.card')
         } else if (date !== '' && date !== undefined) {
-            renderQueryBeers(showSection, fetchBeers, query, number)
+            let fetchBeers = await getBeersDate(date)
+            renderDateBeers(beersSection, fetchBeers)
             drawLikes('.card')
         } else {
-            renderBeersHome(showSection, fetchBeers)
+            let fetchBeers = await getBeers(query, number)
+            renderBeersHome(beersSection, fetchBeers)
             drawLikes('.card')
         }
     } catch (err) {

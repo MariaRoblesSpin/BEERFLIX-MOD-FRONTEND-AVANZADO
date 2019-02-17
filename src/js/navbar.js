@@ -7,15 +7,6 @@ const yearInput = document.querySelector('.input.year')
 searchForm.addEventListener('submit', (evt) => {
     console.log('Input, limit, year: ', searchInput.value, limitInput.value, yearInput.value )
     evt.preventDefault();
-    if (searchInput.value === '') {
-        searchInput.value = undefined
-    }
-    if (limitInput.value === '') {
-        limitInput.value = undefined
-    }
-    if (yearInput.value === '') {
-        yearInput.value = undefined
-    }
     renderDOMBeers(searchInput.value, limitInput.value, yearInput.value)
     // if (searchInput.value !== '' && limitInput.value === ''){
     //     renderDOMBeers(searchInput.value, null, yearInput.value)
