@@ -6,9 +6,12 @@ const CleanWebpackPlugin = require('clean-webpack-plugin')
 
 module.exports = {
   mode: 'production',
-  entry: path.join(__dirname, 'src', 'main.js'),
+  entry:{
+    app: path.join(__dirname, 'src', 'main.js'),
+    detail: path.join(__dirname, 'src', 'detail.js'),
+  },
   output: {
-    filename: 'bundle.js',
+    filename: '[name].bundle.js',
     path: path.join(__dirname, 'dist'),
   },
   module: {
@@ -45,10 +48,12 @@ module.exports = {
     new CleanWebpackPlugin(['dist']),
     new htmlPlugin({
       template: path.join(__dirname, 'src', 'index.html'),
-      minify: {
-        collapseWhitespace: true,
-        removeComments: true,
-      }
+      chunks: ['app'],
+    }),
+    new htmlPlugin({
+      filename: 'detail.html',
+      template: path.join(__dirname, 'src', 'detail.html'),
+      chunks: ['detail'],
     }),
     new MiniCssExtractPlugin(),
   ],

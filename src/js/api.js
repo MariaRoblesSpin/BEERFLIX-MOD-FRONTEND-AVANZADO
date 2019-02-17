@@ -1,5 +1,4 @@
 const API_KEY = 'Q44JRAY-95DMJS6-MQ5PQPX-FPSTHG9';
-
 const api = (API_URL = 'https://web-bootcamp-exercise-beer-api-nijliozdcg.now.sh/api/v1/beers') => {
   const SEARCH_API_URL = `${API_URL}?search=`;
   //const BEERS_URL = `${API_URL}/`;

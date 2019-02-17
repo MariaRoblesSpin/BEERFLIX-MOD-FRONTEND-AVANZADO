@@ -22,7 +22,6 @@ div.loader {
     
     @include tablet {
       display: grid;
-      justify-items: stretch;
       grid-gap: 1rem;
       grid-template-columns: 1fr 1fr ;
       grid-template-rows: minmax(max-content, 200px) repeat(6, max-content) ;

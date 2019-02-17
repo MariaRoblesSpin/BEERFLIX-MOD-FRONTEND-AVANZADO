@@ -10,7 +10,7 @@ const { getBeersDate } = api()
 const templateBeer = ({beerId, name, image, brewersTips, likes, principal}) =>  
     `<div id="_${beerId}" class="card ${principal ? 'principal': 'secondary close'}">
         <header class="card-header">
-        <h2><a href="http://localhost:3000/detail.html?id=${beerId}">${name}</a></h2>
+        <h2><a href="/detail.html?id=${beerId}">${name}</a></h2>
         </header>
         <div class="card-content">
         <div class="card-content-image">

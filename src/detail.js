@@ -1,4 +1,4 @@
-const moment = require('moment');
+const moment = require('moment')
 import './styles/detail.scss'
 import api from './js/api'
 import { renderAllComments } from './js/commentForm'
