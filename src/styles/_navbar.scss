@@ -45,16 +45,19 @@
       picture {
         display: none;
         @include desktop {
-          display: flex;
-          width: 100%;
-          height: 100px;
+          width: 100% !important;
+          height: 100px !important;
           display: flex;
           z-index: -10;
           position: absolute;
-          img, source{
-            object-fit: cover;
+          img {
+            width: 100% !important;
+            object-fit: cover !important;
           }
-          
+          source {
+            width: 100% !important;
+            object-fit: cover !important;
+          }
         }
       }
       .navbar-logo {
@@ -75,14 +78,19 @@
     &.search {
       picture {
         width: 100%;
-        height: 70px;
+        height: 70px !important;
         display: flex;
         z-index: -10;
         position: absolute;
         @include tablet {
-          height: 100px;
+          height: 100px !important;;
         }
-        img, source{
+        img {
+          width: 100%;
+          object-fit: cover;
+        }
+        source {
+          width: 100%;
           object-fit: cover;
         }
       }
