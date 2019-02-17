@@ -1,291 +1,296 @@
 
 .button {
-    background-color: $primary-color-text;
-    border-radius: 2px;
-    border: 1px solid $primary-color-dark;
-    padding: 5px 10px;
-    color: $primary-color-dark;
-    transition: all linear .3s;
-    font-size: $primary-font-size;
-    cursor: pointer;
-    &:hover {
-      background-color: darken($primary-color-text, 20%);
-    }
-    &:active {
-      position:relative;
-      top:1px;
-    }
-    &.selected {
-      background-color: $primary-color-dark;
-      color: $primary-color-text;
-    }
+  background-color: $primary-color-text;
+  border-radius: 2px;
+  border: 1px solid $primary-color-dark;
+  padding: 5px 10px;
+  color: $primary-color-dark;
+  transition: all linear .3s;
+  font-size: $primary-font-size;
+  cursor: pointer;
+  &:hover {
+    background-color: darken($primary-color-text, 20%);
   }
-  
-  .icon {
-    color: $primary-color;
-    background: transparent;
-    border: none;
+  &:active {
+    position:relative;
+    top:1px;
   }
-  
-  .button.secondary {
-    @extend .button;
-  }
-  
-  .button.primary {
-    @extend .button;
+  &.selected {
     background-color: $primary-color-dark;
     color: $primary-color-text;
-    &:hover {
-      background-color: lighten($primary-color-dark, 20%);
-    }
   }
+}
   
-  .button.search {
-    @extend .button;
-    border: none;
-    background-color:$primary-color-dark;
-    color: lighten( $primary-color, 30%);
+.icon {
+  color: $primary-color;
+  background: transparent;
+  border: none;
+}
+
+.button.secondary {
+  @extend .button;
+}
+
+.button.primary {
+  @extend .button;
+  background-color: $primary-color-dark;
+  color: $primary-color-text;
+  &:hover {
+    background-color: lighten($primary-color-dark, 20%);
   }
+}
   
-  .input {
-    width: 100%;
-    border-radius: 2px;
-    padding: 10px;
-    border-style: none;
-    font-size: $primary-font-size;
-    margin: 0 5px 0 0;
+.button.search {
+  @extend .button;
+  border: none;
+  background-color:$primary-color-dark;
+  color: lighten( $primary-color, 30%);
+}
+.input {
+  width: 100%;
+  border-radius: 2px;
+  padding: 10px;
+  border-style: none;
+  font-size: $primary-font-size;
+  margin: 0 5px 0 0;
+}
+.input.primary {
+  @extend .input;
+  margin: 5px 0;
+  border: 1px solid $primary-color-dark;
+}
+.card {
+  position: relative;
+  background: $primary-color-text ;
+  color: $primary-text-color;
+  padding: 0;
+  border: none;
+  border-radius: 2px;
+  box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
+  i, button, a {
+    cursor: pointer;
   }
-  
-  .input.primary {
-    @extend .input;
-    margin: 5px 0;
-    border: 1px solid $primary-color-dark;
-  }
-  
-  .card {
-    position: relative;
-    background: $primary-color-text ;
-    color: $primary-text-color;
-    padding: 0;
-    border: none;
-    border-radius: 2px;
-    box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
-    i, button, a {
-      cursor: pointer;
-    }
-    &.principal {
-      .card-header{
-        h2{
-          a {
-            color: $primary-color-dark;
-          }
+  &.principal {
+    .card-header{
+      h2{
+        a {
+          color: $primary-color-dark;
         }
       }
     }
-    .card-header {
-      padding: 1rem;
-      h2 {
-        font-size: $header-h2;
+  }
+  .card-header {
+    padding: 1rem;
+    h2 {
+      font-size: $header-h2;
+      color: $primary-color;
+      a {
         color: $primary-color;
-        a {
+      }
+    }
+  }
+  .card-content-image img {
+    width: 60%;
+  }
+  .card-content {
+    box-sizing: border-box;
+    padding: 0 1.5rem 1rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    .card-content-image {
+      width: 100%;
+      max-width: 85px;
+      min-width: 85px;
+      @include desktop {
+        max-width: 200px;
+        min-width: 200px;
+      }
+    }
+    .card-content-text {
+      padding-bottom: 10px;
+      position: relative;
+      display: flex;
+      flex-wrap: wrap;
+      p {
+        padding: 0 0 1rem 1rem;
+        font-size: $primary-font-size;
+        line-height: 1.3;
+        width: 100%;
+        max-height: 100%;
+        margin-bottom: 10px;
+        @include desktop {
+          max-height: 200px;
+        }
+      }
+      .rating-container {
+        width: 100%;
+        text-align: end;
+      }
+    }
+  }
+}
+  
+// secondary card styles: affect main and detail.
+.secondary {
+  @extend .card;
+  
+  .card-header {
+    &:after {
+      font-family: "Font Awesome 5 Free";
+      position: absolute;
+      font-size: $icons;
+      top: 13px;
+      right: 16px;
+    }
+    &:after {
+      content: "\f0d8";
+      font-weight: 900;
+    }
+  }
+  .card-content {
+    display: flex;
+    justify-content: space-between;
+  }
+  /* state */
+  &.close {
+    background: $primary-text-color;
+    color: $primary-color-text;
+    @include desktop {
+      &:hover {
+        background-color: $primary-text-color !important;
+        color:$primary-color-text;
+      }
+    }
+    a{
+      color: $primary-color-text;
+    }
+    .card-header {
+      @include desktop {  
+        padding: 0.5rem 0.5rem 0 0.5rem;
+        font-size: $secondary-font-size*0.8;
+      }
+      &:after {
+        content: "\f0d7";
+        font-weight: 900; 
+      }
+    }
+    .card-content {
+      display: none;
+      @include desktop {
+        padding-top: 0;
+        display: flex;
+        height: 100%;
+        justify-content: space-between;
+        p {  
+          overflow:hidden;
+          font-size: $secondary-font-size*0.85;
+          line-height: 1rem;
+          padding: 0 0.5rem 0.5rem 0.5rem;
+        }
+      }
+    }
+  }
+  @include desktop {
+    box-shadow: none !important;
+    overflow: hidden;
+    padding-bottom: 1rem;
+    .card-content {
+      padding: 0;
+      a{
+        color: $primary-color-text;
+        &:hover{
           color: $primary-color;
         }
       }
-    }
-    .card-content-image img {
-      width: 60%;
-    }
-    .card-content {
-      box-sizing: border-box;
-      padding: 0 1.5rem 1rem 1rem;
-      display: flex;
-      justify-content: space-between;
       .card-content-image {
-        width: 100%;
-        max-width: 85px;
-        min-width: 85px;
-        @include desktop {
-          max-width: 200px;
-          min-width: 200px;
-        }
-      }
-      .card-content-text {
-        padding-bottom: 10px;
-        position: relative;
-        display: flex;
-        flex-wrap: wrap;
-        p {
-          padding: 0 0 1rem 1rem;
-          font-size: $primary-font-size;
-          line-height: 1.3;
-          width: 100%;
-          max-height: 100%;
-          margin-bottom: 10px;
-          @include desktop {
-            max-height: 200px;
-          }
-        }
-        .rating-container {
-          width: 100%;
-          text-align: end;
-        }
-      }
-    }
-  }
-  
-  .secondary {
-    @extend .card;
-    
-    .card-header {
-      &:after {
-        font-family: "Font Awesome 5 Free";
         position: absolute;
-        font-size: $icons;
-        top: 13px;
-        right: 16px;
-      }
-      &:after {
-        content: "\f0d8";
-        font-weight: 900;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: auto;
+        max-width: 150px;
+        min-width: auto;
+        padding: 1.5rem;
+        min-height: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        img {
+          height: auto;
+          padding: 1rem;
+        }
       }
     }
-    .card-content {
-      display: flex;
-      justify-content: space-between;
+    .rating-container {
+      display: none;
     }
     /* state */
-    &.close {
-      background: $primary-text-color;
-      color: $primary-color-text;
-      a{
+    .card-content-text,
+    .card-header {
+      transition: opacity .3s linear;
+      visibility: hidden;
+      opacity: 0;
+      h2 {
+        font-size: $header-h2;
         color: $primary-color-text;
       }
-      .card-header {
-        @include desktop {
-          padding: 0.5rem;
-          font-size: $secondary-font-size*0.8;
-        }
-        &:after {
-          content: "\f0d7";
-          font-weight: 900; 
-        }
-      }
-      .card-content {
-        display: none;
-        @include desktop {
-          padding-top: 0;
-          display: flex;
-          height: 100%;
-          justify-content: space-between;
-
-          p {
-            font-size: $secondary-font-size*0.85;
-            line-height: 1rem;
-            padding: 0 0.5rem 0.5rem 0.5rem;
-          }
-        }
-      }
     }
-    @include desktop {
-      box-shadow: none !important;
-      overflow: hidden;
-      padding-bottom: 1rem;
+    &:hover {   
+      background-color: $primary-text-color !important;
+      border-radius: 5px;
+      .card-header {
+        z-index: 1;
+        &:after {
+          display: none;
+        }
+      }
       .card-content {
-        padding: 0;
-        a{
-          color: $primary-color-text;
-          &:hover{
-            color: $primary-color;
-          }
-        }
         .card-content-image {
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          width: auto;
-          max-width: 150px;
-          min-width: auto;
-          padding: 1rem;
-          min-height: auto;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          img {
-            height: auto;
-            padding: 1rem;
-          }
+          display: none;
+        }
+        p {
+          max-height: 200px;
+          overflow-y: auto;
         }
       }
-      
-      .rating-container {
-        display: none;
-      }
-      /* state */
       .card-content-text,
       .card-header {
-        transition: opacity .3s linear;
-        visibility: hidden;
-        opacity: 0;
-        h2 {
-          font-size: $header-h2;
-          color: $primary-color-text;
-        }
+        overflow:hidden;
+        visibility: visible;
+        opacity: 1;
       }
-      &:hover {   
-        background-color: $primary-text-color !important;
-        border-radius: 5px;
-        .card-header {
-          z-index: 1;
-          &:after {
-            display: none;
-          }
-        }
-        .card-content {
-          .card-content-image {
-            display: none;
-          }
-          p {
-            max-height: 200px;
-            overflow-y: auto;
-          }
-        }
-        .card-content-text,
-        .card-header {
-          visibility: visible;
-          opacity: 1;
-        }
-        &,
-        .card-header,
-        .card-content,
-        i {
-          color: $primary-color-text;
-        }
+      &,
+      .card-header,
+      .card-content,
+      i {
+        color: $primary-color-text;
       }
     }
   }
-  
-  .loader {
-    margin-top: -($margin-main/2) !important;
-    z-index: 4;
-    width: 100vw;
-    height: 100vh;
-    background-color: darken($primary-color, 10%);
-    color: $primary-color-text;
-    font-size: 4.4rem;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    @include desktop {
-      margin-top: -$margin-main !important;
-      background-color: $primary-color-text; 
-      color: darken($primary-color, 10%);
-      width: 100%;
-    }
+}
+
+.loader {
+  margin-top: -($margin-main/2) !important;
+  margin-left: -5%;
+  z-index: 4;
+  width: 100vw;
+  height: 100vh;
+  background-color: darken($primary-color, 10%);
+  color: $primary-color-text;
+  font-size: 4.4rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  @include desktop {
+    margin-top: -($margin-main*2) !important;
+    background-color: $primary-color-text; 
+    color: darken($primary-color, 10%);
+    width: 100%;
   }
+}
   
   
   

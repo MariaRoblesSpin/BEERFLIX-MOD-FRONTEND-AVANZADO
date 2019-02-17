@@ -72,7 +72,6 @@
         }
       }
     }
-  
     &.search {
       picture {
         width: 100%;
@@ -90,12 +89,10 @@
       .input{
         &.limit {
           padding: 0 5px;
-          margin: 0 3px;
           width: 34px;
         }
         &.year {
           margin: 0 3px 0 0;
-          padding: 0 5px;
           width: 55px;
         }
       }
@@ -106,7 +103,7 @@
       .filter-container {
         width:80%;
         @include tablet {
-          width: 40%;
+          width: 60%;
         }
         @include desktop {
           padding: 20px;

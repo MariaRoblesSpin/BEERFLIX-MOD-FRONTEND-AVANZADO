@@ -76,7 +76,6 @@ main {
         font-size: $header-h2;
         padding-bottom: 0.7rem;
       }
-
       @include desktop {
         display: flex;
         justify-content: center;
@@ -196,7 +195,20 @@ main {
           box-shadow: none !important;
           overflow: hidden;
           padding-bottom: 1rem;
+          height: max-content;
+          &:hover {   
+            background-color: $primary-color-text !important;
+            border-radius: 5px;
+            &,
+            .card-header,
+            .card-content,
+            i {
+              color: $primary-text-color;
+            }
+          }
         }
+       
+          
         .card-header {
           padding: 0;
           color: $primary-color-text;
@@ -231,8 +243,8 @@ main {
           width: 100%;
           display: grid;
           grid-template-columns: 1fr 1fr;
-          grid-template-rows: unset;
-          grid-column-gap: 0.7rem;
+          grid-template-rows: max-content;
+          grid-gap: 0.7rem;
           margin: 0.3rem 0 1rem 0;
         }
         .box{
@@ -246,12 +258,11 @@ main {
           @include desktop {
             h5 {
               width: max-content;
-              display: inline-block;
-              padding-right: 0.5rem;
             }
             p {
               width: max-content;
-              display: inline-block;
+              display: inline;
+              padding: 0 0.5rem 0 0;
             }
 
           }

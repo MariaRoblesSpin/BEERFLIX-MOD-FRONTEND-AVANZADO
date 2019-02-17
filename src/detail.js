@@ -63,9 +63,6 @@ const detailTemplate = ({beer: {beerId, name, description, image, firstBrewed, b
 		</div>
 	</div>
 </div>
-	
-	
-
 `
 const maltTemplate = ({ name, amount: {value, unit}}) => `
 	<div class="box">
@@ -87,20 +84,21 @@ const yeastTemplate = (yeast) => `
 `
 const renderDetail = async () => {
 	try {
-        const [, id] = window.location.search ? window.location.search.split('=') : []
+		const [, id] = window.location.search ? window.location.search.split('=') : []
 		const oneBeer = await getBeersDetail(id)
 		const beerHTML = detailTemplate(oneBeer)
 		document.getElementById('detail').innerHTML = beerHTML
 		const { beer:{ ingredients: {malt, hops, yeast} } } = oneBeer
 
 		malt.forEach(element => {
-			document.getElementById('malt').insertAdjacentHTML("beforeend", maltTemplate(element)) 
-		});
+			document.getElementById('malt').insertAdjacentHTML('beforeend', maltTemplate(element)) 
+		})
 
 		hops.forEach(element => {
-			document.getElementById('hops').insertAdjacentHTML("beforeend", hopsTemplate(element)) 
-		});
-		document.getElementById('yeast').insertAdjacentHTML("beforeend", yeastTemplate(yeast))
+			document.getElementById('hops').insertAdjacentHTML('beforeend', hopsTemplate(element)) 
+		})
+		
+		document.getElementById('yeast').insertAdjacentHTML('beforeend', yeastTemplate(yeast))
 		drawLikes('.likes')
 		const header = document.querySelector('.card.secondary .card-header')
 		const headerId = header.parentNode.getAttribute('id')

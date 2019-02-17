@@ -24,7 +24,7 @@ div.loader {
       display: grid;
       grid-gap: 1rem;
       grid-template-columns: 1fr 1fr ;
-      grid-template-rows: minmax(max-content, 200px) repeat(6, max-content) ;
+      grid-template-rows: max-content repeat(6, max-content) ;
       div:first-child {
        margin: 0;
       }
@@ -49,7 +49,7 @@ div.loader {
       }
     }
     @include desktop {
-      margin: $margin-main 0 ;
+      margin: $margin-main*2 0 0 0;
       display: grid;
       grid-gap: 2rem;
       grid-template-columns: repeat(6, 1fr);
