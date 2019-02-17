@@ -1,5 +1,5 @@
 # BEERFLIX
-A RWD web to find the best beers of the galaxy.
+A responsive web to find the best beers of the galaxy.
 
 ## Webpack configuration
 
